@@ -11,10 +11,18 @@ public class Main {
             System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
             driver = new ChromeDriver();
             WebDriverWait wait = new WebDriverWait(driver, 30);
-            driver.get("https://rozetka.com.ua/");
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='header-phones__button']")));
-            String headerPhonesButtonText = driver.findElement(By.xpath("//*[@class='header-phones__button']")).getText();
-            System.out.println(headerPhonesButtonText.replaceAll("[^\\d.]", ""));
+            driver.get("http://rozetka.com.ua/");
+
+            //войти в личный кабинет
+            wait.until(ExpectedConditions.elementToBeClickable((By.xpath("//*[@class='header-topline__user-link link-dashed']")))).click();
+
+            // - нажать "Зарегистрироваться"
+            wait.until(ExpectedConditions.elementToBeClickable((By.xpath("//*[@class='auth-modal__register-link']")))).click();
+
+            // - Оставить пустыми «Ваше имя», «Эл. Почта или номер телефона», «Придумайте Пароль»
+
+            //Нажать войти
+            wait.until(ExpectedConditions.elementToBeClickable((By.xpath("//*[@class='button button_size_large button_color_green auth-modal__submit']")))).click();
         } catch (Exception e) {
             System.err.println("Error open site : " + e.getMessage());
         }
