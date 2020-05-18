@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.annotations.AfterTest;
 
@@ -14,15 +15,21 @@ import static org.testng.Assert.assertNotEquals;
 public class RozetkaTest {
 
     static WebDriver driver = null;
+    static String expectedBorderColor = null;
+    static String actualBorderColor = "";
+
+    @BeforeTest
+    public void before_test(){
+        expectedBorderColor = "rgb(248, 65, 71)";
+        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+        driver = new ChromeDriver();
+    }
 
     @Test
     public static void negativeRegistrationAttemptAllFields() {
 
         try {
-            String expectedBorderColor = "rgb(248, 65, 71)";
-            String actualBorderColor = "";
-            System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-            driver = new ChromeDriver();
+
             WebDriverWait wait = new WebDriverWait(driver, 30);
             driver.get("http://rozetka.com.ua/");
 
@@ -45,16 +52,6 @@ public class RozetkaTest {
             System.out.println(wait.until(ExpectedConditions.elementToBeClickable((By.xpath("//*[@formcontrolname='username']")))).getCssValue("border-color")); //formcontrolname="username"
             //comment out the line below to fail the test
             System.out.println(wait.until(ExpectedConditions.elementToBeClickable((By.xpath("//*[@formcontrolname='password']")))).getCssValue("border-color")); //formcontrolname="name"
-            /*
-            if (wait.until(ExpectedConditions.elementToBeClickable((By.xpath("//*[@formcontrolname='name']")))).getCssValue("border-color").toString().equals(expectedBorderColor) &
-                    wait.until(ExpectedConditions.elementToBeClickable((By.xpath("//*[@formcontrolname='username']")))).getCssValue("border-color").toString().equals(expectedBorderColor) &
-                    wait.until(ExpectedConditions.elementToBeClickable((By.xpath("//*[@formcontrolname='password']")))).getCssValue("border-color").toString().equals(expectedBorderColor)
-            ) {
-                actualBorderColor = expectedBorderColor;
-            }
-            assertEquals(expectedBorderColor, actualBorderColor, "One of field not highlighted by red");
-
-             */
 
             actualBorderColor = wait.until(ExpectedConditions.elementToBeClickable((By.xpath("//*[@formcontrolname='name']")))).getCssValue("border-color");
             assertEquals(expectedBorderColor, actualBorderColor, "'Name' field populated, but highlighted by red");
@@ -76,9 +73,9 @@ public class RozetkaTest {
     public static void negativeRegistrationAttemptTwoFields() {
 
         try {
-            String expectedBorderColor = "rgb(248, 65, 71)";
-            String actualBorderColor = "";
-            System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+            //String expectedBorderColor = "rgb(248, 65, 71)";
+            //String actualBorderColor = "";
+            //System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
             driver = new ChromeDriver();
             WebDriverWait wait = new WebDriverWait(driver, 30);
             driver.get("http://rozetka.com.ua/");
