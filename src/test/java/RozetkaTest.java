@@ -18,6 +18,7 @@ public class RozetkaTest {
     static String expectedBorderColor = null;
     static String actualBorderColor = "";
 
+
     @BeforeTest
     public void before_test(){
         expectedBorderColor = "rgb(248, 65, 71)";
@@ -116,12 +117,10 @@ public class RozetkaTest {
             actualBorderColor = wait.until(ExpectedConditions.elementToBeClickable((By.xpath("//*[@formcontrolname='password']")))).getCssValue("border-color");
             assertEquals(expectedBorderColor, actualBorderColor, "'Password' field not populated, but not highlighted by red");
 
-
         } catch (Exception e) {
             System.err.println("Error open site : " + e.getMessage());
         }
         driver.quit();
-
     }
 
 
