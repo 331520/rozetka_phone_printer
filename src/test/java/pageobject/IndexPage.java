@@ -13,6 +13,7 @@ import java.util.List;
 public class IndexPage {
     private final WebDriver driver;
     private final WebDriverWait wait;
+    public String ctl;
     private String searchString;
     private String eState;
 
@@ -75,7 +76,6 @@ public class IndexPage {
 
         //list of categories
         List<WebElement> listOfleftPanelItems = driver.findElements(leftPanelItems);
-        System.out.println("items was found : " + listOfleftPanelItems.size());
 
         //check each of category
         for (WebElement element : listOfleftPanelItems) {
@@ -88,5 +88,11 @@ public class IndexPage {
             }
         }
         return this.eState;
+    }
+    public Integer countAllSamsungCategories(String eState){
+        //list of categories
+        List<WebElement> listOfleftPanelItems = driver.findElements(leftPanelItems);
+        System.out.println("items was found : " + listOfleftPanelItems.size());
+        return listOfleftPanelItems.size();
     }
 }

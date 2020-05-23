@@ -19,7 +19,9 @@ public class RozetkaPOTest extends TestBaseSetup {
     //mvn clean -Dtest=RozetkaPOTest#iPhoneOnly test
     @Test
     public void iPhoneOnly() {
+
         String expectedState = "iPhone";
+
         indexPage.openPage();
         indexPage.setSearch(expectedState);
         indexPage.detectIfIphoneItemsOnPage();
@@ -33,10 +35,19 @@ public class RozetkaPOTest extends TestBaseSetup {
     @Test
     public void samsungOnly() {
         String expectedState = "samsung";
+        Integer expectedCategoriesAmount  = 9;
         indexPage.openPage();
         indexPage.setSearch(expectedState);
         indexPage.detectIfSamsungItemsOnPage();
+
+        //Check that all categories displayed
+        Integer actualCategoriesAmount = indexPage.countAllSamsungCategories(expectedState);
+        assertEquals(actualCategoriesAmount, expectedCategoriesAmount, "Error on page. Expected categories amount : "
+                + expectedCategoriesAmount + " biu found " + actualCategoriesAmount + " categories");
+        System.out.println("countAllSamsungCategories passed");
+
         String actualState = indexPage.detectAllProducer(expectedState);
         assertEquals(actualState, expectedState, "Error on page. non-Samsung category : " + actualState);
+        System.out.println("detectAllProducer passed");
     }
 }
