@@ -1,4 +1,5 @@
-# Page Object pattern. Домашнее задание(Rozetka) 
+# Page Object pattern. Домашнее задание(Rozetka)
+# mvn clean -Dtest=RozetkaPOTest test 
 ##Тест # 1
 ## mvn clean -Dtest=RozetkaPOTest#iPhoneOnly test
 ### Написать тест согласно следующего сценария:
