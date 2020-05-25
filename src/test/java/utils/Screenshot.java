@@ -18,8 +18,19 @@ public class Screenshot {
     public void getScreenshot(ITestResult testResult) {
         TakesScreenshot screenshot = (TakesScreenshot) driver;
         File src = screenshot.getScreenshotAs(OutputType.FILE);
-        String screenshotName = "screenshots/" + testResult.getTestClass().getName().replace(".", "/")
-                + "/" + testResult.getMethod().getConstructorOrMethod().getName()+".png";
+        String methodName = testResult.getMethod().getConstructorOrMethod().getName();
+        //System.out.println(methodName + " param 0 : " + testResult.getParameters()[0]);
+        String screenshotName;
+        if (methodName.equals("notebookFiltersCheck")) {
+            screenshotName = "screenshots/" + testResult.getTestClass().getName().replace(".", "/")
+                    + "/" + methodName + "_" + testResult.getParameters()[0] +".png";
+        } else {
+            screenshotName = "screenshots/" + testResult.getTestClass().getName().replace(".", "/")
+                    + "/" + methodName+".png";
+        }
+
+
+
         try {
             FileUtils.copyFile(src, new File(screenshotName));
         } catch (IOException e) {

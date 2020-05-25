@@ -18,12 +18,17 @@ public class IndexPage {
     public String ctl;
     private String searchString;
     private String eState;
+    private String address;
+    private String producer;
     public Logger logger = LogManager.getLogger(IndexPage.class);
 
     By search = By.name("search"); //search field
     By catalogIphone =  By.xpath("//*[@class='catalog-grid__cell catalog-grid__cell_type_slim']"); //catalog of iphones items
     By leftPanelItems =  By.xpath("//*[@name='menu_categories_left']"); // left panel categories
     By links = By.tagName("a"); // search all links
+    //By producerCheck = By.id(producer);
+
+
 
 
     public IndexPage(WebDriver driver) {
@@ -32,8 +37,9 @@ public class IndexPage {
         logger.info("Webdriver created ");
     }
 
-    public IndexPage openPage(){
-        driver.get("https://rozetka.com.ua/");
+    public IndexPage openPage(String address){
+        this.address = address;
+        driver.get(this.address);
         return this;
     }
 
@@ -48,7 +54,6 @@ public class IndexPage {
     }
 
     public IndexPage detectIfIphoneItemsOnPage(){
-        logger.info("search phrase was set");
         wait.until(ExpectedConditions.presenceOfElementLocated(catalogIphone));
         logger.info("Goods at the page");
         return this;
@@ -63,11 +68,12 @@ public class IndexPage {
     public String detectAllCardsForIfone(String eState){
         logger.info("start to detect all products");
         this.eState=eState;
-        logger.debug("items was found : " + this.eState);
+        logger.debug("Start to detect for : " + this.eState);
         List<WebElement> listOfElementsIphone = driver.findElements(catalogIphone);
         logger.debug("items was found : " + listOfElementsIphone.size());
         for (WebElement element : listOfElementsIphone) {
-            if (!element.getText().contains(eState)) {
+            logger.debug("\r\n================> Check for '"+this.producer+"' : " + element.getText());
+            if (!element.getText().toLowerCase().contains(eState.toLowerCase())) {
             //if (!element.getText().contains("Meizu")) {
                 logger.warn("Wrong element was found : " + element.getText());
                 this.eState = element.getText();
@@ -105,5 +111,16 @@ public class IndexPage {
         List<WebElement> listOfleftPanelItems = driver.findElements(leftPanelItems);
         logger.debug("items was found : " + listOfleftPanelItems.size());
         return listOfleftPanelItems.size();
+    }
+
+    public IndexPage setFilter(String producer){
+        logger.info("set producer: "+producer+" filter");
+        this.producer = producer;
+        //WebElement producerCheckbox = driver.findElement(By.id(this.producer));
+        WebElement producerCheckbox = driver.findElement(By.xpath("//*[@for='"+this.producer+"']"));
+        logger.debug(producerCheckbox.getText());
+        producerCheckbox.click();
+
+        return this;
     }
 }
