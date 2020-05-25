@@ -31,6 +31,7 @@ public class RozetkaPOTest extends TestBaseSetup {
         assertEquals(actualState, expectedState, "Error on page. Some item isn't iPhone: " + actualState);
     }
 
+    /*
     //mvn clean -Dtest=RozetkaPOTest#samsungOnly test
     @Test
     public void samsungOnly() {
@@ -50,4 +51,6 @@ public class RozetkaPOTest extends TestBaseSetup {
         assertEquals(actualState, expectedState, "Error on page. non-Samsung category : " + actualState);
         System.out.println("detectAllProducer passed");
     }
+
+     */
 }

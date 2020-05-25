@@ -1,6 +1,8 @@
 package pageobject;
 
 import com.sun.org.apache.xpath.internal.objects.XString;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -16,6 +18,7 @@ public class IndexPage {
     public String ctl;
     private String searchString;
     private String eState;
+    public Logger logger = LogManager.getLogger(IndexPage.class);
 
     By search = By.name("search"); //search field
     By catalogIphone =  By.xpath("//*[@class='catalog-grid__cell catalog-grid__cell_type_slim']"); //catalog of iphones items
@@ -26,6 +29,7 @@ public class IndexPage {
     public IndexPage(WebDriver driver) {
         this.driver = driver;
         wait = new WebDriverWait(this.driver, 20);
+        logger.info("Webdriver created ");
     }
 
     public IndexPage openPage(){
