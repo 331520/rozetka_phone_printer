@@ -20,8 +20,9 @@ public class Screenshot {
         File src = screenshot.getScreenshotAs(OutputType.FILE);
         String methodName = testResult.getMethod().getConstructorOrMethod().getName();
         //System.out.println(methodName + " param 0 : " + testResult.getParameters()[0]);
+
         String screenshotName;
-        if (methodName.equals("notebookFiltersCheck")) {
+        if (methodName.equals("notebookFiltersCheck")) { //notebookFiltersCheck method repeates 3 times with different parameters
             screenshotName = "screenshots/" + testResult.getTestClass().getName().replace(".", "/")
                     + "/" + methodName + "_" + testResult.getParameters()[0] +".png";
         } else {
