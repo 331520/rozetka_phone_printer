@@ -1,6 +1,5 @@
 package pageobject;
 
-import com.sun.org.apache.xpath.internal.objects.XString;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
