@@ -3,8 +3,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pageobject.IndexPage;
 
-import java.util.List;
-
 import static org.testng.Assert.assertEquals;
 
 public class RozetkaPOTest extends TestBaseSetup {
@@ -31,7 +29,7 @@ public class RozetkaPOTest extends TestBaseSetup {
         assertEquals(actualState, expectedState, "Error on page. Some item isn't iPhone: " + actualState);
     }
 
-    /*
+
     //mvn clean -Dtest=RozetkaPOTest#samsungOnly test
     @Test
     public void samsungOnly() {
@@ -45,12 +43,8 @@ public class RozetkaPOTest extends TestBaseSetup {
         Integer actualCategoriesAmount = indexPage.countAllSamsungCategories(expectedState);
         assertEquals(actualCategoriesAmount, expectedCategoriesAmount, "Error on page. Expected categories amount : "
                 + expectedCategoriesAmount + " biu found " + actualCategoriesAmount + " categories");
-        System.out.println("countAllSamsungCategories passed");
 
         String actualState = indexPage.detectAllProducer(expectedState);
         assertEquals(actualState, expectedState, "Error on page. non-Samsung category : " + actualState);
-        System.out.println("detectAllProducer passed");
     }
-
-     */
 }

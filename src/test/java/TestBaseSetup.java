@@ -1,11 +1,14 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import utils.Screenshot;
 
 public class TestBaseSetup {
     WebDriver driver;
+    Screenshot screenshot;
 
     @BeforeMethod
     public void beforeMethod() {
@@ -15,10 +18,14 @@ public class TestBaseSetup {
         //options.addArguments("--window-size=1300,1080");
         driver = new ChromeDriver();
         //driver.manage().window().maximize();
+        screenshot = new Screenshot(driver);
     }
 
     @AfterMethod
-    public void afterMethod() {
+
+    public void afterMethod(ITestResult result) {
+        screenshot.getScreenshot(result);
         driver.quit();
     }
+
 }

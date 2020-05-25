@@ -38,6 +38,7 @@ public class IndexPage {
     }
 
     public IndexPage setSearch(String searchString){
+        logger.info("site opened");
         this.searchString = searchString;
         WebElement searchEl = driver.findElement(search);
         wait.until(ExpectedConditions.elementToBeClickable(searchEl));
@@ -47,25 +48,28 @@ public class IndexPage {
     }
 
     public IndexPage detectIfIphoneItemsOnPage(){
+        logger.info("search phrase was set");
         wait.until(ExpectedConditions.presenceOfElementLocated(catalogIphone));
-        System.out.println("Goods at the page");
+        logger.info("Goods at the page");
         return this;
     }
 
     public IndexPage detectIfSamsungItemsOnPage(){
         wait.until(ExpectedConditions.presenceOfElementLocated(leftPanelItems));
-        System.out.println("Goods at the page");
+        logger.info("Goods at the page");
         return this;
     }
 
     public String detectAllCardsForIfone(String eState){
+        logger.info("start to detect all products");
         this.eState=eState;
+        logger.debug("items was found : " + this.eState);
         List<WebElement> listOfElementsIphone = driver.findElements(catalogIphone);
-        System.out.println("items was found : " + listOfElementsIphone.size());
+        logger.debug("items was found : " + listOfElementsIphone.size());
         for (WebElement element : listOfElementsIphone) {
             if (!element.getText().contains(eState)) {
             //if (!element.getText().contains("Meizu")) {
-                //System.out.println(element.getText());
+                logger.warn("Wrong element was found : " + element.getText());
                 this.eState = element.getText();
                 break;
             }
@@ -74,12 +78,14 @@ public class IndexPage {
     }
 
     public String detectAllProducer(String eState){
+        logger.info("start to detect all products");
         this.eState=eState;
         String hrf; //category url
         String txt; //category url's text
 
         //list of categories
         List<WebElement> listOfleftPanelItems = driver.findElements(leftPanelItems);
+        logger.debug("items was found : " + listOfleftPanelItems.size());
 
         //check each of category
         for (WebElement element : listOfleftPanelItems) {
@@ -87,6 +93,7 @@ public class IndexPage {
             txt = element.findElement(links).getText();
             if (hrf.contains("producer") & !hrf.contains(eState)) {
             //if (hrf.contains("producer") & !hrf.contains("Meizu")) { //uncomment for getting the failed test
+                logger.error("Wrong producer was found : " + txt + ". URL :"+ hrf);
                 this.eState = txt;
                 break;
             }
@@ -96,7 +103,7 @@ public class IndexPage {
     public Integer countAllSamsungCategories(String eState){
         //list of categories
         List<WebElement> listOfleftPanelItems = driver.findElements(leftPanelItems);
-        System.out.println("items was found : " + listOfleftPanelItems.size());
+        logger.debug("items was found : " + listOfleftPanelItems.size());
         return listOfleftPanelItems.size();
     }
 }
