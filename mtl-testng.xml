@@ -2,6 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Default" parallel="methods" thread-count="2">
     <test name="Fst">
+        <parameter name="browser" value="chrome"/>
         <classes>
             <class name="RozetkaPOTest" />
             <class name="RozetkaPOTestIphoneTest" />
