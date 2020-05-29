@@ -71,7 +71,7 @@ public class IndexPage {
         List<WebElement> listOfElementsIphone = driver.findElements(catalogIphone);
         logger.debug("items was found : " + listOfElementsIphone.size());
         for (WebElement element : listOfElementsIphone) {
-            logger.debug("\r\n================> Check for '"+this.producer+"' : " + element.getText());
+            logger.debug("\r\n================> Check for '"+this.eState+"' : " + element.getText());
             if (!element.getText().toLowerCase().contains(eState.toLowerCase())) {
             //if (!element.getText().contains("Meizu")) {
                 logger.warn("Wrong element was found : " + element.getText());

@@ -15,23 +15,21 @@ public class RozetkaPOTest extends TestBaseSetup {
         indexPage = new IndexPage(driver);
     }
 
-    //mvn clean -Dtest=RozetkaPOTest#iPhoneOnly test
     @Test
-    public void iPhoneOnly() {
-        String expectedState = "iPhone";
-
+    public void testMethod1(){
         indexPage.openPage("https://rozetka.com.ua/");
-        indexPage.setSearch(expectedState);
-        indexPage.detectIfIphoneItemsOnPage();
-
-        //check for items card. All items mus me "iPhone"
-        String actualState = indexPage.detectAllCardsForIfone(expectedState);
-        assertEquals(actualState, expectedState, "Error on page. Some item isn't iPhone: " + actualState);
     }
+
+/*
+    @Test
+    public void testMethod2(){
+        indexPage.openPage("https://www.google.com/");
+    }
+*/
 
 
     //mvn clean -Dtest=RozetkaPOTest#samsungOnly test
-    @Test
+   /* @Test
     public void samsungOnly() {
         String expectedState = "samsung";
         Integer expectedCategoriesAmount  = 9;
@@ -50,10 +48,8 @@ public class RozetkaPOTest extends TestBaseSetup {
 
     //mvn clean -Dtest=RozetkaPOTest#notebookFiltersCheck test
     @Test(dataProvider = "getProducerName")
-    //@Test()
-    public void notebookFiltersCheck(String producer) {
-    //public void notebookFiltersCheck() {
-        String expectedState = producer;
+      public void notebookFiltersCheck(String producer) {
+          String expectedState = producer;
         indexPage.openPage("https://rozetka.com.ua/notebooks/c80004/preset=workteaching/");
         //indexPage.setSearch(expectedState);
         indexPage.detectIfIphoneItemsOnPage();
@@ -73,7 +69,7 @@ public class RozetkaPOTest extends TestBaseSetup {
                 {"Apple"},
                 {"Acer"}
         };
-    }
+    }*/
 
 
 }
