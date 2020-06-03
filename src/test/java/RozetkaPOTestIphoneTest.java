@@ -12,14 +12,15 @@ public class RozetkaPOTestIphoneTest extends TestBaseSetup {
         indexPage = new IndexPage(driver);
     }
 
-    /*@Test
+    @Test
     public void testMethod1(){
-        indexPage.openPage("https://rozetka.com.ua/");
-    }*/
+        indexPage.openPage("https://www.google.com/");
+    }
 
     @Test
     public void testMethod2(){
-        indexPage.openPage("https://www.google.com/");
+        indexPage.openPage("https://rozetka.com.ua/");
+
     }
 
 

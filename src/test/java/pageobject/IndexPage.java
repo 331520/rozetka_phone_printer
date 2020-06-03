@@ -1,5 +1,7 @@
 package pageobject;
 
+import io.qameta.allure.Feature;
+import io.qameta.allure.Step;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -36,6 +38,7 @@ public class IndexPage {
         logger.info("Webdriver created ");
     }
 
+    @Step("Open page")
     public IndexPage openPage(String address){
         this.address = address;
         driver.get(this.address);
@@ -52,18 +55,21 @@ public class IndexPage {
         return this;
     }
 
+    @Step("Open Iphone Index age")
     public IndexPage detectIfIphoneItemsOnPage(){
         wait.until(ExpectedConditions.presenceOfElementLocated(catalogIphone));
         logger.info("Goods at the page");
         return this;
     }
 
+    @Step("Open Index age")
     public IndexPage detectIfSamsungItemsOnPage(){
         wait.until(ExpectedConditions.presenceOfElementLocated(leftPanelItems));
         logger.info("Goods at the page");
         return this;
     }
 
+    @Step("detect All Cards For Ifone")
     public String detectAllCardsForIfone(String eState){
         logger.info("start to detect all products");
         this.eState=eState;

@@ -1,3 +1,4 @@
+import io.qameta.allure.Feature;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -5,6 +6,7 @@ import org.testng.annotations.Test;
 import pageobject.IndexPage;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.fail;
 
 public class RozetkaPOTest extends TestBaseSetup {
     IndexPage indexPage;
@@ -15,17 +17,19 @@ public class RozetkaPOTest extends TestBaseSetup {
         indexPage = new IndexPage(driver);
     }
 
+    @Feature("Open Rozetka")
     @Test
     public void testMethod1(){
         indexPage.openPage("https://rozetka.com.ua/");
     }
 
-/*
+    @Feature("Open Google")
     @Test
     public void testMethod2(){
         indexPage.openPage("https://www.google.com/");
+        fail();
     }
-*/
+
 
 
     //mvn clean -Dtest=RozetkaPOTest#samsungOnly test

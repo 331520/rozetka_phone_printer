@@ -4,3 +4,4 @@ target/
 *.exe
 /logs/
 /screenshots/
+/allure-results/

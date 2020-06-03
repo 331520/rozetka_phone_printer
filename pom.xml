@@ -7,6 +7,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <suiteXmlFile>smoke-testng.xml</suiteXmlFile>
+        <aspectj.version>1.8.10</aspectj.version>
     </properties>
 
     <groupId>org.example</groupId>
@@ -50,6 +51,19 @@
             <version>3.141.59</version>
             <scope>test</scope>
         </dependency>
+            <dependency>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-testng</artifactId>
+                <version>2.13.3</version>
+                <scope>test</scope>
+            </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-java-commons</artifactId>
+            <version>2.13.3</version>
+        </dependency>
+
+
     </dependencies>
     <build>
         <resources>
@@ -81,11 +95,19 @@
                         <suiteXmlFiles>
                             <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
                         </suiteXmlFiles>
+                        <argLine>
+                            -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                        </argLine>
                     </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.aspectj</groupId>
+                            <artifactId>aspectjweaver</artifactId>
+                            <version>${aspectj.version}</version>
+                        </dependency>
+                    </dependencies>
                 </plugin>
             </plugins>
         </pluginManagement>
     </build>
-
-
 </project>
