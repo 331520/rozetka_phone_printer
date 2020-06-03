@@ -3,6 +3,7 @@
 <suite name="Default" parallel="classes" thread-count="2">
     <listeners>
         <listener class-name="utils.Listener"/>
+        <listener class-name="utils.AnnotationTransformer"/>
     </listeners>
     <test name="Fst">
         <parameter name="browser" value="chrome"/>
