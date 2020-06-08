@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
+import java.util.Random;
 
 
 public class IndexPage {
@@ -27,6 +28,9 @@ public class IndexPage {
     By catalogIphone =  By.xpath("//*[@class='catalog-grid__cell catalog-grid__cell_type_slim']"); //catalog of iphones items
     By leftPanelItems =  By.xpath("//*[@name='menu_categories_left']"); // left panel categories
     By links = By.tagName("a"); // search all links
+    By data_filter_name  = By.xpath("//*[@data-filter-name='producer']"); //
+    By checkboxFilterLink  = By.className("checkbox-filter__link"); //
+
     //By producerCheck = By.id(producer);
 
 
@@ -125,7 +129,34 @@ public class IndexPage {
         WebElement producerCheckbox = driver.findElement(By.xpath("//*[@for='"+this.producer+"']"));
         logger.debug(producerCheckbox.getText());
         producerCheckbox.click();
+        return this;
+    }
+
+    public IndexPage setRandomFilter(){
+        //WebElement producerCheckbox = driver.findElement(By.id(this.producer));
+
+        //List<WebElement> producerCheckbox = driver.findElements(By.xpath("//*[@for='"+this.producer+"']"));
+        //locate producers
+        WebElement dataFilterNameWE = driver.findElement(data_filter_name);
+        List<WebElement> producerCheckbox = dataFilterNameWE.findElements(checkboxFilterLink);
+        Random random = new Random();
+        int randomProducerId =  random.nextInt(producerCheckbox.size());
+        WebElement randomProducerWE = producerCheckbox.get(randomProducerId);
+        System.out.println("We will click : "+ randomProducerWE.getText());
+        System.out.println("We check      : "+ randomProducerWE.getAttribute("href"));
+        randomProducerWE.click();
+
+        //delete it before pull to git
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("producerCheckbox.size() : " + producerCheckbox.size());
 
         return this;
     }
+
+
 }

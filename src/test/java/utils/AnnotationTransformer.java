@@ -20,6 +20,5 @@ public class AnnotationTransformer  implements IAnnotationTransformer {
             iTestAnnotation.setDataProvider("getProducerNameM");
         }
         iTestAnnotation.setRetryAnalyzer(RetAnalyzer.class);
-        //iTestAnnotation.setDataProvider();
     }
 }

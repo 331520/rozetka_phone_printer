@@ -19,7 +19,7 @@ public class RozetkaPOTest extends TestBaseSetup {
         indexPage = new IndexPage(driver);
     }
 
-    @Feature("Open Rozetka")
+/*    @Feature("Open Rozetka")
     //@Test(retryAnalyzer = RetAnalyzer.class)
     @Test()
     public void testMethod1(){
@@ -32,7 +32,7 @@ public class RozetkaPOTest extends TestBaseSetup {
     public void testMethod2(){
         indexPage.openPage(PropertyLoaded.loadProperty("url_g"));
         fail();
-    }
+    }*/
 
 
     //mvn clean -Dtest=RozetkaPOTest#samsungOnly test
@@ -70,7 +70,7 @@ public class RozetkaPOTest extends TestBaseSetup {
     }*/
 
 
-    @Test()
+   /* @Test()
     public void notebookFiltersCheckA(String producer) {
         String expectedState = producer;
         indexPage.openPage(PropertyLoaded.loadProperty("url_r_notebooks"));
@@ -82,11 +82,13 @@ public class RozetkaPOTest extends TestBaseSetup {
         //check for items card. All items mus me "iPhone"
         String actualState = indexPage.detectAllCardsForIfone(expectedState);
         assertEquals(actualState, expectedState, "Error on page. Some item not from '" + producer + "' producer : " + actualState);
-    }
+    }*/
 
 
-    @Test()
+
+    /*@Test(retryAnalyzer = RetAnalyzer.class)
     public void notebookFiltersCheckM(String producer) {
+        System.out.println("producer : " +producer);
         String expectedState = producer;
         indexPage.openPage(PropertyLoaded.loadProperty("url_r_notebooks"));
         //indexPage.setSearch(expectedState);
@@ -97,6 +99,19 @@ public class RozetkaPOTest extends TestBaseSetup {
         //check for items card. All items mus me "iPhone"
         String actualState = indexPage.detectAllCardsForIfone(expectedState);
         assertEquals(actualState, expectedState, "Error on page. Some item not from '" + producer + "' producer : " + actualState);
-    }
+    }*/
 
+    @Test()
+    public void notebookRandomFilters() {
+        String producer = "Acer";
+        System.out.println("producer : " +producer);
+        String expectedState = producer;
+        indexPage.openPage(PropertyLoaded.loadProperty("url_r_notebooks"));
+        indexPage.detectIfIphoneItemsOnPage();
+        indexPage.setRandomFilter();
+        //indexPage.detectIfIphoneItemsOnPage();
+        //check for items card. All items mus me "iPhone"
+        //String actualState = indexPage.detectAllCardsForIfone(expectedState);
+       //assertEquals(actualState, expectedState, "Error on page. Some item not from '" + producer + "' producer : " + actualState);
+    }
 }
