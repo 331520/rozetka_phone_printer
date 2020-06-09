@@ -39,7 +39,7 @@ public class Listener implements
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-        logger.trace("Test was Success");
+        logger.info("Test was Success");
     }
 
     @Override

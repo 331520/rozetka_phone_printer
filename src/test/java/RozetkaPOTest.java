@@ -1,3 +1,4 @@
+import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
@@ -7,11 +8,14 @@ import pageobject.IndexPage;
 import utils.PropertyLoaded;
 import utils.RetAnalyzer;
 
+import java.util.HashMap;
+
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
 public class RozetkaPOTest extends TestBaseSetup {
     IndexPage indexPage;
+    HashMap<String, String> hMap = new HashMap<>();
 
 
     @BeforeMethod
@@ -102,16 +106,14 @@ public class RozetkaPOTest extends TestBaseSetup {
     }*/
 
     @Test()
+    @Description("Testing items of random producers on Rozetka")
     public void notebookRandomFilters() {
-        String producer = "Acer";
-        System.out.println("producer : " +producer);
-        String expectedState = producer;
+
+        //String expectedState = producer;
         indexPage.openPage(PropertyLoaded.loadProperty("url_r_notebooks"));
         indexPage.detectIfIphoneItemsOnPage();
-        indexPage.setRandomFilter();
-        //indexPage.detectIfIphoneItemsOnPage();
-        //check for items card. All items mus me "iPhone"
-        //String actualState = indexPage.detectAllCardsForIfone(expectedState);
-       //assertEquals(actualState, expectedState, "Error on page. Some item not from '" + producer + "' producer : " + actualState);
+        hMap.put("check_result", "y");
+        indexPage.setRandomFilter(hMap);
+        assertEquals(hMap.get("check_result"), "y", "Error on page. Some item not from '" + hMap.get("producer") + "' producer/ Wrong item is : " + hMap.get("item"));
     }
 }
