@@ -15,7 +15,7 @@ import static org.testng.Assert.fail;
 
 public class RozetkaPOTest extends TestBaseSetup {
     IndexPage indexPage;
-    HashMap<String, String> hMap = new HashMap<>();
+    HashMap<String, String> hMap = new HashMap<String, String>();
 
 
     @BeforeMethod
