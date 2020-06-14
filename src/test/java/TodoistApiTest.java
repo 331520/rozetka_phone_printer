@@ -19,7 +19,7 @@ public class TodoistApiTest {
     String name = "";
     long newTaskId;
 
-    /*
+/*
     @Test()
     @Description("Testing projects by todoist api")
     public void getP() {
@@ -43,7 +43,8 @@ public class TodoistApiTest {
         assertTrue(actualIDs.contains(fstPrjId), "Needed project id '" + fstPrjId + "' isn't found");
         //assertFalse(actualIDs.contains(fstPrjId), "Needed project id '" + fstPrjId + "' isn't found");
     }
-
+*/
+    /*
     @Test()
     @Description("Testing active tasks in Project by todoist api")
     public void getT() {
@@ -68,8 +69,8 @@ public class TodoistApiTest {
         //System.out.println(response.getBody().peek());
         assertEquals(actualTAskIDs.size(), 3, "Wrong  tasks amount. Expected '3' but found : " + actualTAskIDs.size());
     }
-
     */
+
 
     @Test(priority = 1)
     @Description("Create a new task")
@@ -175,6 +176,4 @@ public class TodoistApiTest {
         then().
                         statusCode(204);
     }
-
-
 }
