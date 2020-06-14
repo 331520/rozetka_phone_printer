@@ -169,10 +169,4 @@ public class TodoistApiTest {
         assertEquals(actualTAskIDs.size(), 3, "Wrong  tasks amount. Expected '3' but found : " + actualTAskIDs.size());
     }
     */
-
-
-
-
-
-
 }
