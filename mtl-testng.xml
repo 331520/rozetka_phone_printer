@@ -8,8 +8,9 @@
     <test name="Fst">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="RozetkaPOTest" />
+            <!--<class name="RozetkaPOTest" />-->
             <!--<class name="RozetkaPOTestIphoneTest" />-->
+            <class name="TodoistApiTest"/>
         </classes>
     </test>
 </suite>
