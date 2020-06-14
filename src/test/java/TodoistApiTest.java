@@ -16,7 +16,10 @@ public class TodoistApiTest {
 
     String todoistToken = "Bearer 44fb2d6a3d7ffe079a319a3c5ed7e152a135f6cb";
     String fstPrjId = "2237883857";
+    String name = "";
+    long newTaskId;
 
+    /*
     @Test()
     @Description("Testing projects by todoist api")
     public void getP() {
@@ -66,11 +69,13 @@ public class TodoistApiTest {
         assertEquals(actualTAskIDs.size(), 3, "Wrong  tasks amount. Expected '3' but found : " + actualTAskIDs.size());
     }
 
-    @Test()
+    */
+
+    @Test(priority = 1)
     @Description("Create a new task")
-    public void postNewTask() {
+    public void createNewTask() {
         Faker faker = new Faker();
-        String name = faker.name().fullName();
+        name = faker.name().fullName();
         System.out.println("Name :" + name );
 
         String reqBody = "{\n" +
@@ -84,12 +89,92 @@ public class TodoistApiTest {
                 "}";
 
         //Response response =
-                given().
+        newTaskId = given().
                 header("Authorization", todoistToken).
                 contentType(ContentType.JSON).
                 //body(new File("CreateTaskBody.json")).
                 body(reqBody).
                 when().
-                post("https://api.todoist.com/rest/v1/tasks").then().statusCode(200);
+                    post("https://api.todoist.com/rest/v1/tasks").
+                then().
+                        statusCode(200).
+                        extract().
+                        path("id");
+
     }
+
+    //@Test(dependsOnMethods = "createNewTask")
+    @Test(priority = 2)
+    @Description("Get active task")
+    public void getActiveTask() {
+        Response response = given().
+                header("Authorization", todoistToken).
+                when().
+                get("https://api.todoist.com/rest/v1/tasks/" + newTaskId);
+
+        String createdTaskContent = response.body().path("content").toString();
+        System.out.println(createdTaskContent);
+
+        assertEquals("Appointment with " + name, createdTaskContent, "ERROR. Expected 'Appointment with  "+name+"' but found : " + createdTaskContent);
+    }
+
+    //@Test(dependsOnMethods = "createNewTask")
+    @Test(priority = 3)
+    @Description("Update task")
+    public void updateNewTask() {
+        String reqBody = "{\n" +
+                "\t\"content\": \"NEW Appointment with  "+name+"  \"\n" +
+                "}";
+        //String updatedTaskContent =
+        given().
+                header("Authorization", todoistToken).
+                contentType(ContentType.JSON).
+                //body(new File("CreateTaskBody.json")).
+                        body(reqBody).
+        when().
+                        post("https://api.todoist.com/rest/v1/tasks/" + newTaskId).
+        then().
+                        statusCode(204);
+        //assertEquals("NEW Appointment with "+name, updatedTaskContent, "ERROR: task wasn't updated expected NEW Appointment with " + name + " but found" + updatedTaskContent);
+    }
+
+    //@Test(dependsOnMethods = "createNewTask")
+    @Test(priority = 4)
+    @Description("Close a task")
+    public void closeTask() {
+        //String updatedTaskContent =
+        given().
+                header("Authorization", todoistToken).
+                contentType(ContentType.JSON).
+                //body(new File("CreateTaskBody.json")).
+        when().
+                        post("https://api.todoist.com/rest/v1/tasks/"+newTaskId+"/close").
+        then().
+                        statusCode(204);
+        //assertEquals("NEW Appointment with "+name, updatedTaskContent, "ERROR: task wasn't updated expected NEW Appointment with " + name + " but found" + updatedTaskContent);
+    }
+
+    @Test(priority = 5)
+    @Description("Reopen a task")
+    public void reopenTask() {
+        given().
+                header("Authorization", todoistToken).
+        when().
+                        post("https://api.todoist.com/rest/v1/tasks/"+newTaskId+"/reopen").
+        then().
+                        statusCode(204);
+    }
+
+@Test(priority = 6)
+    @Description("Delete a task")
+    public void deleteTask() {
+        given().
+                header("Authorization", todoistToken).
+        when().
+                        delete("https://api.todoist.com/rest/v1/tasks/"+newTaskId).
+        then().
+                        statusCode(204);
+    }
+
+
 }
